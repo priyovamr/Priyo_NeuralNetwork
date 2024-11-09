@@ -1,0 +1,23 @@
+name: Priyo_NeuralNetwork Workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  train-model:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Train the model
+        run: python train.py
+      - name: Evaluate the model
+        run: python evaluate.py
+      - name: Deploy the model
+        run: python deploy.py
